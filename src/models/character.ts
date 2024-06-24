@@ -9,15 +9,16 @@ import {
 import Planet from './planet'
 import Episode from './episode'
 import CharacterEpisode from './characterEpisode'
-import { isNumeric } from 'validator'
 
 @Table
 export default class Character extends Model {
-  declare setPlanet: any
-  declare getPlanet: any
-  declare addEpisodes: any
-  declare setEpisodes: any
-  declare getEpisodes: any
+  declare setPlanet: Function
+  declare getPlanet: Function
+  declare addEpisodes: Function
+  declare setEpisodes: Function
+  declare getEpisodes: Function
+  declare removeEpisodes: Function
+  declare removePlanet: Function
 
   @Column
   name: string
@@ -51,7 +52,7 @@ export const getCharacter = async (id: number): Promise<Character | Object> => {
   })
 
   if (!(character instanceof Character)) {
-    return {}
+    throw new Error('There is no such Character')
   }
 
   return formatGetterData(character)
@@ -63,7 +64,7 @@ export const createCharacter = async (
   const character = await createOrUpdateData(body)
 
   if (!(character instanceof Character)) {
-    return {}
+    throw new Error('There is no such Character')
   }
 
   return formatGetterData(character)
@@ -73,13 +74,13 @@ export const updateCharacter = async (id: number, body: any) => {
   const character = await createOrUpdateData(body, id)
 
   if (!(character instanceof Character)) {
-    return {}
+    throw new Error('There is no such Character')
   }
 
   return formatGetterData(character)
 }
 
-const formatGetterData = (character: Character) => {
+const formatGetterData = (character: Character): any => {
   const data: any = {
     id: character.id,
     name: character.name,
@@ -106,10 +107,12 @@ const createOrUpdateData = async (body: any, id?: number) => {
   let character: Character | null
 
   if (id) {
-    character = await Character.findByPk(id)
+    character = await Character.findByPk(id, {
+      include: [Planet, Episode],
+    })
 
     if (!(character instanceof Character)) {
-      return {}
+      throw new Error('There is no such Character')
     }
 
     character.name = body.name
@@ -121,24 +124,26 @@ const createOrUpdateData = async (body: any, id?: number) => {
   }
 
   if (body.hasOwnProperty('planetId')) {
-    let planet: Planet | null = null
+    if (Number.isInteger(body.planetId)) {
+      const planet = await Planet.findByPk(body.planetId)
 
-    if (isNumeric(body.planetId)) {
-      planet = await Planet.findByPk(body.planetId)
+      await character.setPlanet(planet)
+    } else {
+      await character.setPlanet(null)
     }
-
-    await character.setPlanet(planet)
   }
 
   if (body.hasOwnProperty('episodeIds')) {
-    const episodes = await Episode.findAll({
-      where: {
-        id: body.episodeIds,
-      },
-    })
+    if (body.episodeIds instanceof Array && body.episodeIds.length) {
+      const episodes = await Episode.findAll({
+        where: {
+          id: body.episodeIds,
+        },
+      })
 
-    if (episodes instanceof Array && episodes.length) {
       await character.setEpisodes(episodes)
+    } else {
+      await character.setEpisodes(null)
     }
   }
 

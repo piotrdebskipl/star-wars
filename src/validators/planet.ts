@@ -7,11 +7,7 @@ export const readOneValidator = [
 ]
 
 export const createValidator = [
-  [
-    body('name').notEmpty().isString().trim(),
-    body('planetId').optional().isNumeric(),
-    body('episodeIds').optional().isArray(),
-  ],
+  [body('name').notEmpty().isString().trim()],
   resultValidator,
 ]
 
@@ -19,8 +15,6 @@ export const updateValidator = [
   [
     param('id').notEmpty().isNumeric(),
     body('name').optional().isString().trim(),
-    body('planetId').optional(),
-    body('episodeIds').optional(),
   ],
   resultValidator,
 ]

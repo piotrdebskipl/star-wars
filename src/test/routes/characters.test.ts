@@ -1,6 +1,6 @@
 import express, { Express } from 'express'
 import request from 'supertest'
-import router from '../../services/router'
+import router from '../../middlewares/router'
 import bodyParser from 'body-parser'
 
 describe('Characters Route', () => {

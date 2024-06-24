@@ -1,8 +1,12 @@
-import express, { Express } from 'express'
+import express, { Express, NextFunction, Request, Response } from 'express'
 import dotenv from 'dotenv'
-import router from './services/router'
+import router from './middlewares/router'
 import bodyParser from 'body-parser'
 import db from './services/db'
+import errorHandler from './middlewares/errorHandler'
+import logErrors from './middlewares/logErrors'
+import clientErrorHandler from './middlewares/clientErrorHandler'
+import logger from './services/logger'
 
 dotenv.config()
 
@@ -12,9 +16,11 @@ const port = process.env.PORT || 8080
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(router)
+app.use(logErrors)
+app.use(clientErrorHandler)
+app.use(errorHandler)
 
-db.sync().then(() => {
-  app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-  })
+app.listen(port, async () => {
+  await db.sync()
+  logger.info(`So far so good. Listening on port ${port}`)
 })

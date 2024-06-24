@@ -12,6 +12,7 @@ module.exports = {
       CharacterId: {
         type: Sequelize.INTEGER,
         allowNull: true,
+        onDelete: 'CASCADE',
         references: {
           model: 'Characters',
           key: 'id',
@@ -20,6 +21,7 @@ module.exports = {
       EpisodeId: {
         type: Sequelize.INTEGER,
         allowNull: true,
+        onDelete: 'CASCADE',
         references: {
           model: 'Episodes',
           key: 'id',

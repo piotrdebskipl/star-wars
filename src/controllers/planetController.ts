@@ -1,51 +1,51 @@
 import { NextFunction, Request, Response } from 'express'
-import Character, {
-  createCharacter,
-  getCharacter,
-  getCharacters,
-  updateCharacter,
-} from '../models/character'
+import Planet, {
+  createPlanet,
+  getPlanet,
+  getPlanets,
+  updatePlanet,
+} from '../models/planet'
 
-export const characterController = {
+export const planetController = {
   readAllAction: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const characters = await getCharacters()
+      const palanets = await getPlanets()
 
-      res.json(characters)
+      res.json(palanets)
     } catch (err) {
       next(err)
     }
   },
   readOneAction: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const character = await getCharacter(parseInt(req.params.id))
+      const planet = await getPlanet(parseInt(req.params.id))
 
-      res.json(character)
+      res.json(planet)
     } catch (err) {
       next(err)
     }
   },
   createAction: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const character = await createCharacter(req.body)
+      const planet = await createPlanet(req.body)
 
-      res.json(character)
+      res.json(planet)
     } catch (err) {
       next(err)
     }
   },
   updateAction: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const character = await updateCharacter(parseInt(req.params.id), req.body)
+      const planet = await updatePlanet(parseInt(req.params.id), req.body)
 
-      res.json(character)
+      res.json(planet)
     } catch (err) {
       next(err)
     }
   },
   deleteAction: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await Character.destroy({ where: { id: req.params.id } })
+      await Planet.destroy({ where: { id: req.params.id } })
 
       res.json({})
     } catch (err) {

@@ -1,9 +1,15 @@
 import { Router } from 'express'
-import { characterController } from '../controllers/characterController'
+import { planetController } from '../controllers/planetController'
+import {
+  createValidator,
+  deleteValidator,
+  readOneValidator,
+  updateValidator,
+} from '../validators/planet'
 
 export default Router()
-  .get('/characters', characterController.readAllAction)
-  .get('/characters/:id', characterController.readOneAction)
-  .post('/characters', characterController.createAction)
-  .put('/characters/:id', characterController.updateAction)
-  .delete('/characters/:id', characterController.deleteAction)
+  .get('/planets', planetController.readAllAction)
+  .get('/planets/:id', ...readOneValidator, planetController.readOneAction)
+  .post('/planets', ...createValidator, planetController.createAction)
+  .put('/planets/:id', ...updateValidator, planetController.updateAction)
+  .delete('/planets/:id', ...deleteValidator, planetController.deleteAction)
