@@ -7,12 +7,15 @@ import errorHandler from './middlewares/errorHandler'
 import logErrors from './middlewares/logErrors'
 import clientErrorHandler from './middlewares/clientErrorHandler'
 import logger from './services/logger'
+import helmet from 'helmet'
 
 dotenv.config()
 
 const app: Express = express()
 const port = process.env.PORT || 8080
 
+app.disable('x-powered-by')
+app.use(helmet())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(router)
