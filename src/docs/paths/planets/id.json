@@ -1,0 +1,129 @@
+{
+  "get": {
+    "tags": ["planets"],
+    "summary": "Get planet by id",
+    "description": "",
+    "operationId": "getPlanetById",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Planet Id"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Planet",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../schemas/Planet.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  },
+  "put": {
+    "tags": ["planets"],
+    "summary": "Edit planet by id",
+    "description": "",
+    "operationId": "editPlanetById",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Planet Id"
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "../../schemas/PlanetInput.json"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Planet edited",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../schemas/Planet.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorized"
+      }
+    }
+  },
+  "delete": {
+    "tags": ["planets"],
+    "summary": "Delete planet by id",
+    "description": "",
+    "operationId": "deletePlanetById",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Planet Id"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Planet",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "default": "Planet deleted successfully"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  }
+}

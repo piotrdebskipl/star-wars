@@ -1,0 +1,66 @@
+{
+  "post": {
+    "tags": ["planets"],
+    "summary": "Create planet",
+    "description": "",
+    "operationId": "createPlanet",
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "../../schemas/PlanetInput.json"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Planet created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../schemas/Planet.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorized"
+      }
+    }
+  },
+  "get": {
+    "tags": ["planets"],
+    "summary": "Get all planets",
+    "description": "",
+    "operationId": "getPlanet",
+    "responses": {
+      "200": {
+        "description": "Planet",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "../../schemas/Planet.json"
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  }
+}

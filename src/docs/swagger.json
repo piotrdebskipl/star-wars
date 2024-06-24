@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "API Documentation",
+    "version": "1.0.0",
+    "title": "Star Wars API",
+    "contact": {
+      "email": "career@piotrdebski.pl"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/",
+      "description": "Local environment"
+    }
+  ],
+  "tags": [
+    {
+      "name": "planets",
+      "description": "Planet"
+    }
+  ],
+  "paths": {
+    "/planets": {
+      "$ref": "./paths/planets/index.json"
+    },
+    "/planets/{id}": {
+      "$ref": "./paths/planets/id.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "PlanetInput": {
+        "$ref": "./schemas/PlanetInput.json"
+      },
+      "Planet": {
+        "$ref": "./schemas/Planet.json"
+      }
+    }
+  }
+}
