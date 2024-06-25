@@ -1,0 +1,66 @@
+{
+  "post": {
+    "tags": ["characters"],
+    "summary": "Create character",
+    "description": "",
+    "operationId": "createCharacter",
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "../../schemas/CharacterInput.json"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Character created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../schemas/Character.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorized"
+      }
+    }
+  },
+  "get": {
+    "tags": ["characters"],
+    "summary": "Get all characters",
+    "description": "",
+    "operationId": "getCharacter",
+    "responses": {
+      "200": {
+        "description": "Character",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "../../schemas/Character.json"
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  }
+}

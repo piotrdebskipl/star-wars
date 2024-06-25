@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "episodes": {
+      "type": "array",
+      "items": {
+        "$ref": "./Episode.json"
+      }
+    },
+    "planet": {
+      "$ref": "./Planet.json"
+    }
+  }
+}

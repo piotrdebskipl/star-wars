@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "default": ""
+    },
+    "episodeIds": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "required": false,
+      "default": ""
+    },
+    "planetId": {
+      "type": "number",
+      "required": false,
+      "default": ""
+    }
+  }
+}

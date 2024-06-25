@@ -1,0 +1,129 @@
+{
+  "get": {
+    "tags": ["episodes"],
+    "summary": "Get episode by id",
+    "description": "",
+    "operationId": "getEpisodeById",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Episode Id"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Episode",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../schemas/Episode.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  },
+  "put": {
+    "tags": ["episodes"],
+    "summary": "Edit episode by id",
+    "description": "",
+    "operationId": "editEpisodeById",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Episode Id"
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "../../schemas/EpisodeInput.json"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Episode edited",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../schemas/Episode.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorized"
+      }
+    }
+  },
+  "delete": {
+    "tags": ["episodes"],
+    "summary": "Delete episode by id",
+    "description": "",
+    "operationId": "deleteEpisodeById",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Episode Id"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Episode",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "default": "Episode deleted successfully"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request"
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  }
+}

@@ -16,11 +16,31 @@
   ],
   "tags": [
     {
+      "name": "characters",
+      "description": "Characters"
+    },
+    {
+      "name": "episodes",
+      "description": "Episodes"
+    },
+    {
       "name": "planets",
       "description": "Planet"
     }
   ],
   "paths": {
+    "/characters": {
+      "$ref": "./paths/characters/index.json"
+    },
+    "/characters/{id}": {
+      "$ref": "./paths/characters/id.json"
+    },
+    "/episodes": {
+      "$ref": "./paths/episodes/index.json"
+    },
+    "/episodes/{id}": {
+      "$ref": "./paths/episodes/id.json"
+    },
     "/planets": {
       "$ref": "./paths/planets/index.json"
     },
@@ -30,6 +50,18 @@
   },
   "components": {
     "schemas": {
+      "CharacterInput": {
+        "$ref": "./schemas/CharacterInput.json"
+      },
+      "Character": {
+        "$ref": "./schemas/Character.json"
+      },
+      "EpisodeInput": {
+        "$ref": "./schemas/EpisodeInput.json"
+      },
+      "Episode": {
+        "$ref": "./schemas/Episode.json"
+      },
       "PlanetInput": {
         "$ref": "./schemas/PlanetInput.json"
       },
