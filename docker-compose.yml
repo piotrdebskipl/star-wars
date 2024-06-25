@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 services:
   api:
     restart: always
@@ -8,18 +8,18 @@ services:
     depends_on:
       - db
     volumes:
-    - .:/usr/src/app
-    - ./logs:/usr/src/app/logs
+      - .:/usr/src/app
+      - ./logs:/usr/src/app/logs
 
   db:
     image: postgres
     ports:
-      - '5433:${DB_PORT}'
+      - '5432:${DB_PORT}'
     volumes:
       - data:/data/db
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_PASSWORD=${DB_PASS}
 
-volumes: 
+volumes:
   data: {}

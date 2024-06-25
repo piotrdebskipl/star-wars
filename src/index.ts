@@ -1,4 +1,4 @@
-import express, { Express, NextFunction, Request, Response } from 'express'
+import express, { Express } from 'express'
 import dotenv from 'dotenv'
 import router from './middlewares/router'
 import bodyParser from 'body-parser'
